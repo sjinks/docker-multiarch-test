@@ -4,8 +4,6 @@ ARG ARCH
 COPY qemu-${ARCH}-static /usr/bin
 RUN uname -ar && uname -ar > /uname.build
 
-FROM ${BASE_IMAGE_PREFIX}alpine AS base
+FROM ${BASE_IMAGE_PREFIX}alpine
 COPY --from=base /uname.build /uname.build
 CMD ['uname', '-a']
-
-
