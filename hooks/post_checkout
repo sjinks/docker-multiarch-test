@@ -8,5 +8,5 @@ apt-get update
 apt-get install -y curl qemu-user-static binfmt-support
 
 for arch in ${ARCHS}; do
-	cp /usr/bin/qemu-${docker_qemu_arch_map[${arch}]}-static qemu-${arch}-static
+	cp /usr/bin/qemu-${docker_qemu_arch_map[${arch}]}-static ./
 done
