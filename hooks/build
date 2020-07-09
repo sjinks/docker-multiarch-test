@@ -6,7 +6,7 @@ source hooks/config.sh
 
 for arch in $ARCHS; do
 	BASE_IMAGE_PREFIX="${base_image_prefix_map[${arch}]}"
-	ARCH_SUFFIX="${arch_suffix_map[${arch}]}"
+	ARCH_SUFFIX="${tag_suffix_map[${arch}]}"
 	docker build \
 		--build-arg BASE_IMAGE_PREFIX=${BASE_IMAGE_PREFIX} \
 		--build-arg ARCH=${arch} \

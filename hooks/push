@@ -7,7 +7,7 @@ source hooks/config.sh
 IMAGE_NAME="${IMAGE_NAME//index.docker.io\/}"
 MANIFESTS=""
 for arch in ${ARCHS}; do
-	ARCH_SUFFIX="${arch_suffix_map[${arch}]}"
+	ARCH_SUFFIX="${tag_suffix_map[${arch}]}"
 	docker push ${IMAGE_NAME}-${ARCH_SUFFIX}
 	MANIFESTS="${MANIFESTS} ${IMAGE_NAME}-${ARCH_SUFFIX}"
 done
@@ -15,7 +15,7 @@ done
 docker manifest create ${IMAGE_NAME} $MANIFESTS
 
 for arch in ${ARCHS}; do
-	ARCH_SUFFIX="${arch_suffix_map[${arch}]}"
+	ARCH_SUFFIX="${tag_suffix_map[${arch}]}"
 	docker manifest annotate ${IMAGE_NAME} ${IMAGE_NAME}-${ARCH_SUFFIX} \
 		--os linux \
 		--arch "${arch_to_manifest_map[${arch}]}" \
