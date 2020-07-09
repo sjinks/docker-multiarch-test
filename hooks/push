@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+export DOCKER_CLI_EXPERIMENTAL=enabled
 
 source hooks/config.sh
 
