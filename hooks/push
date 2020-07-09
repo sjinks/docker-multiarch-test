@@ -5,17 +5,19 @@ source hooks/config.sh
 IMAGE_NAME="${IMAGE_NAME//index.docker.io\/}"
 MANIFESTS=""
 for arch in ${ARCHS}; do
-	docker push ${IMAGE_NAME}-${arch}
-	MANIFESTS="${MANIFESTS} ${IMAGE_NAME}-${arch}"
+	ARCH_SUFFIX="${arch_suffix_map[${arch}]}"
+	docker push ${IMAGE_NAME}-${ARCH_SUFFIX}
+	MANIFESTS="${MANIFESTS} ${IMAGE_NAME}-${ARCH_SUFFIX}"
 done
 
 docker manifest create ${IMAGE_NAME} $MANIFESTS
 
 for arch in ${ARCHS}; do
-	docker manifest annotate ${IMAGE_NAME} ${IMAGE_NAME}-${arch} \
-	--os linux \
-	--arch "${arch_to_manifest_map[${arch}]}" \
-	--variant "${arch_to_variant_map[${arch}]}"
+	ARCH_SUFFIX="${arch_suffix_map[${arch}]}"
+	docker manifest annotate ${IMAGE_NAME} ${IMAGE_NAME}-${ARCH_SUFFIX} \
+		--os linux \
+		--arch "${arch_to_manifest_map[${arch}]}" \
+		--variant "${arch_to_variant_map[${arch}]}"
 done
 
-#docker manifest push --purge "${IMAGE_NAME}"
+docker manifest push --purge "${IMAGE_NAME}"
