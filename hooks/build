@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 source hooks/config.sh
 
 for arch in $ARCHS; do

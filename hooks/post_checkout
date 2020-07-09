@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 source hooks/config.sh
 
 apt-get update
